@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Biblioteca
@@ -14,32 +13,28 @@ namespace Biblioteca
         public DateTime DataEmprestimo { get; private set; }
         public DateTime DataDevolucao { get; private set; }
 
-        public override string Titulo { get; set; }
-        public override string Autor { get; set; }
-        public override int AnoPublicacao { get; set; }
-        public override int NumPaginas { get; set; }
+        public MidiaDigital(int codigo, string titulo, string autor, int anoPublicacao, int numPaginas) : base(titulo, autor, anoPublicacao, numPaginas)
+        {
 
-
-        public void Emprestar(DateTime dataEmprestimo)
+        }
+        public string Emprestar(DateTime dataEmprestimo)
         {
             if (!Emprestado)
             {
                 Emprestado = true;
                 DataEmprestimo = dataEmprestimo;
-                DataDevolucao = dataEmprestimo.AddDays(30);
-
-                Console.WriteLine($"A midia digital: {Titulo} foi compartilhada em: ({DataEmprestimo.ToShortDateString()})");
+             
+                return $"A Midia digital: {Titulo} do {Autor} foi compartilhada em: ({DataEmprestimo.ToShortDateString()})";
             }
             else
             {
-                Console.WriteLine($"A midia digital: {Titulo}  não esta mais disponível para compartilhamento.");
+                return $"A Midia digital: {Titulo}  não esta mais disponível para compartilhamento.";
             }
         }
 
-        public void Devolver(DateTime dataDevolucao)
-        {
-            Console.WriteLine($"Midia Digital não tem devolução.");
+        public string Devolver(DateTime dataDevolucao)
+        {      
+               return $"Midia Digital não tem devolução.";          
         }
-
     }
 }

@@ -20,49 +20,26 @@ namespace Biblioteca
     {
         static void Main(string[] args)
         {
-            Livro livro = new Livro(1, "Harry Potter", "J.K.", 2000, 1000);
+            Livro livro = new Livro (1, "Harry Potter", "J.K.", 2000, 1000);
 
-            Revista revista = new Revista
-            {
-                CodigoRevista = 2,
-                Titulo = "Tititi",
-                Autor = "Sonia Abrao",
-                AnoPublicacao = 2023,
-                NumPaginas = 30
-            };
+            Revista revista = new Revista(1, "Tititi", "Sonia Abrao", 2000, 1000);
 
-            MidiaDigital midia = new MidiaDigital
-            {
-                CodigoMidia = 3,
-                Titulo = "A usurpadora",
-                Autor = "Paola",
-                AnoPublicacao = 1990,
-                NumPaginas = 100
-            };
+            MidiaDigital midia = new MidiaDigital(1, "Enter Sandman", "Metallica", 2000, 10);
 
             Biblioteca biblioteca = new Biblioteca();
-
-
+           
             biblioteca.AdicionarItem(livro);
             biblioteca.AdicionarItem(revista);
             biblioteca.AdicionarItem(midia);
-
-
+            
             DateTime dataEmprestimo = DateTime.Now;
             DateTime dataDevolucao = dataEmprestimo.AddDays(14);
 
-            biblioteca.EmprestarItem(livro, dataEmprestimo);
-            biblioteca.DevolverItem(livro, dataDevolucao);
-
+            Imprimir.ImprimirLivro(dataDevolucao,dataEmprestimo, livro);
             Console.WriteLine();
-
-            biblioteca.EmprestarItem(revista, dataEmprestimo);
-            biblioteca.DevolverItem(revista, dataDevolucao);
-
+            Imprimir.ImprimirRevista(dataDevolucao, dataEmprestimo, revista);
             Console.WriteLine();
-
-            biblioteca.EmprestarItem(midia, dataEmprestimo);
-            biblioteca.DevolverItem(midia, dataDevolucao);
+            Imprimir.ImprimirMidiaDigital(dataDevolucao, dataEmprestimo, midia);
 
             Console.ReadKey();
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Biblioteca
@@ -13,20 +12,11 @@ namespace Biblioteca
         public DateTime DataEmprestimo { get; private set; }
         public DateTime DataDevolucao { get; private set; }
 
-        public override string Titulo { get; set; }
-        public override string Autor { get; set; }
-        public override int AnoPublicacao { get; set; }
-        public override int NumPaginas { get; set; }
-
-        public Livro(int codigo, string titulo, string autor, int anoPublicacao, int numPaginas) 
+        public Livro(int codigo, string titulo, string autor, int anoPublicacao, int numPaginas) : base(titulo, autor, anoPublicacao, numPaginas) 
         {
-            CodigoLivro = codigo;
-            Titulo = titulo;
-            Autor = autor;
-            AnoPublicacao = anoPublicacao;
-            NumPaginas = numPaginas;
+          
         }
-        public void Emprestar(DateTime dataEmprestimo)
+        public string Emprestar(DateTime dataEmprestimo)
         {
             if (!Emprestado)
             {
@@ -34,23 +24,26 @@ namespace Biblioteca
                 DataEmprestimo = dataEmprestimo;
                 DataDevolucao = dataEmprestimo.AddDays(15);
 
-                Console.WriteLine($"Livro: {Titulo} foi emprestado em ({DataEmprestimo.ToShortDateString()})");
-                Console.WriteLine($"Data máxima para devolução: ({DataDevolucao.ToShortDateString()}).");
+                return $"Livro: {Titulo} foi emprestado em ({DataEmprestimo.ToShortDateString()})" +
+                Environment.NewLine + $"Data máxima para devolução: ({DataDevolucao.ToShortDateString()}).";
             }
             else
             {
-                Console.WriteLine($"Livro: {Titulo} está emprestado.");
+                return $"Livro: {Titulo} está emprestado.";
             }
         }
 
-        public void Devolver(DateTime dataDevolucao)
+        public string Devolver(DateTime dataDevolucao)
         {
             if (Emprestado)
             {
                 Emprestado = false;
                 DataDevolucao = dataDevolucao;
-                Console.WriteLine($"Livro: {Titulo} devolvido em ({DataDevolucao.ToShortDateString()}).");
+                return $"Livro: {Titulo} devolvido em ({DataDevolucao.ToShortDateString()}).";
             }
+            else
+                return "Livro não devolvido";
+            
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Biblioteca
@@ -14,14 +13,17 @@ namespace Biblioteca
         {
             ItensDisponiveis = new List<IPodeSerEmprestado>();
         }
+
         public void AdicionarItem(IPodeSerEmprestado item)
         {
             ItensDisponiveis.Add(item);
         }
+
         public void EmprestarItem(IPodeSerEmprestado item, DateTime dataEmprestimo)
         {
             item.Emprestar(dataEmprestimo);
         }
+
         public void DevolverItem(IPodeSerEmprestado item, DateTime dataDevolucao)
         {
             item.Devolver(dataDevolucao);
